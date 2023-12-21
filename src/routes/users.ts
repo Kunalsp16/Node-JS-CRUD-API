@@ -39,3 +39,25 @@ router.post('/', (req: Request, res: Response) => {
   
     res.status(201).json(newUser);
   });
+
+  // PUT api/users/{userId}
+router.put('/:userId', (req: Request, res: Response) => {
+    const userId = req.params.userId;
+  
+    if (!userId) {
+      return res.status(400).json({ error: 'Invalid userId' });
+    }
+  
+    const userIndex = users.findIndex((u) => u.id === userId);
+  
+    if (userIndex === -1) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+  
+    const { username, age, hobbies } = req.body;
+    const updatedUser: User = { id: userId, username, age, hobbies };
+  
+    users[userIndex] = updatedUser;
+  
+    res.status(200).json(updatedUser);
+  });
