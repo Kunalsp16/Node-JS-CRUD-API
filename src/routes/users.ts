@@ -25,3 +25,17 @@ router.get('/:userId', (req: Request, res: Response) => {
 
   res.status(200).json(user);
 });
+
+// POST api/users
+router.post('/', (req: Request, res: Response) => {
+    const { username, age, hobbies } = req.body;
+  
+    if (!username || !age || !hobbies) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+  
+    const newUser = createUser(username, age, hobbies);
+    users.push(newUser);
+  
+    res.status(201).json(newUser);
+  });
