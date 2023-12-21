@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { User, createUser } from '../models/User';
+import { v4 as uuidv4, validate as isUUID } from 'uuid'
 
 const router = express.Router();
 let users: User[] = [];
@@ -13,7 +14,7 @@ router.get('/',(req: Request, res: Response) => {
 router.get('/:userId', (req: Request, res: Response) => {
   const userId = req.params.userId;
 
-  if (!userId) {
+  if (!isUUID(userId)) {
     return res.status(400).json({ error: 'Invalid userId' });
   }
 
@@ -44,7 +45,7 @@ router.post('/', (req: Request, res: Response) => {
 router.put('/:userId', (req: Request, res: Response) => {
     const userId = req.params.userId;
   
-    if (!userId) {
+    if (!isUUID(userId)) {
       return res.status(400).json({ error: 'Invalid userId' });
     }
   
@@ -63,11 +64,11 @@ router.put('/:userId', (req: Request, res: Response) => {
   });
 
   // DELETE api/users/{userId}
-  
+
 router.delete('/:userId', (req: Request, res: Response) => {
     const userId = req.params.userId;
   
-    if (!userId) {
+    if (!isUUID(userId)) {
       return res.status(400).json({ error: 'Invalid userId' });
     }
   
