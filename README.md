@@ -8,8 +8,4 @@ This project is a simple CRUD API implemented in Node.js using Express, with an 
 - npm
 - TypeScript
 
-** Installation
 
-1. Clone the repository:
-
--  gh repo clone Kunalsp16/Node-JS-CRUD-API
